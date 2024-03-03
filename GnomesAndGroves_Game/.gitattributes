@@ -1,9 +1,0 @@
-# Set default behavior to normalize line endings
-* text=auto
-
-# Specify files that should have LF line endings on checkout
-*.txt text eol=lf
-*.sh text eol=lf
-
-# Specify files in a specific directory and its subdirectories
-GnomesAndGroves_Game/** text eol=crlf
