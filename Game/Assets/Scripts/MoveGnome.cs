@@ -4,27 +4,39 @@ using UnityEngine;
 
 public class MoveGnome : MonoBehaviour
 {
-    public float speed = 20.0f;
-    public float rotSpeed = 500f;
-    public float horizontalInput;
-    public float verticalInput;
-    public float rotAmount;
+    private float speed = 10.0f;
+    private float rotSpeed = 100f;
+    private float horizontalInput;
+    private float verticalInput;
+    private float rotAmount;
+    //private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = -1 * Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(verticalInput, 0f, 0f).normalized;
+        // Set IsRunning parameter based on input
+        //bool isRunning = (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f);
+        //animator.SetBool("IsRun", isRunning);
 
-        transform.Translate(move * speed * Time.deltaTime, Space.Self);
+        Vector3 move = new Vector3(verticalInput, 0f, 0f).normalized;
+        if (verticalInput != 0)
+        {
+            transform.Translate(move * speed * Time.deltaTime, Space.Self);
+        }
+        else 
+        {
+            if (verticalInput > 0)
+                transform.Translate(move * speed * Time.deltaTime, Space.Self);
+        }
 
         rotAmount = horizontalInput * rotSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up * rotAmount);
